@@ -188,8 +188,24 @@ function curl_progress_callback($dltotal, $dlnow, $ultotal, $ulnow){
 }
 getFile();
 
----Useragent Servisleri---
- 1- https://user-agents.net/parser/action=parse&format=[json|xml]&string=   //post isteği direk api link
+---Useragent Servisleri ve Curl İstek Örnekleri---
+ 1- https://user-agents.net/parser/action=parse&format=json&string= //post isteği direk api link json xml ile değiştirilebilir
+
+$useragent = $_SERVER['HTTP_USER_AGENT'];
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, 'https://user-agents.net/parser');
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_TIMEOUT, 5);
+curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($curl, CURLOPT_POSTFIELDS, 'action=parse&string='. $useragent .'&format=json');
+$response = curl_exec($curl);
+curl_close($curl);
+echo $response;
+
+
+
+
 
 ---Ip api servisleri---
 1- http://ip-api.com
