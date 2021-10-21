@@ -7,6 +7,7 @@ aynı değerleri php tarafındada session cookie vasıtasıyla 4ün birden kontr
 4- https://www.delftstack.com/howto/javascript/detect-mobile-browser-javascript/ - javascript ile mobile browser detection
 5- \n yeni satır oluşturmak için \r işaretciyi sıfırlar ve soldan başlatan satırbaşı döndürür kullanımı \r\n yalnız "" çift tırnak içinde kullanılması gerekir.
 6- http client - tam olarak anlamadım araştırılacak
+7- Mobilmi diye kod yazarken mobi kelimesinin kullanılması neredeyse yeterli
 
 ---Ternary operator
 $can_vote = ($age>17 ? true : false);
@@ -99,6 +100,40 @@ for ($i = 0; $i < count($arr); $i++){
 }
 
 file_put_contents($file, $ip."    ".$time."\n", FILE_APPEND);
+
+
+function get_ip() {
+		$mainIp = '';
+		if (getenv('HTTP_CLIENT_IP'))
+			$mainIp = getenv('HTTP_CLIENT_IP');
+		else if(getenv('HTTP_X_FORWARDED_FOR'))
+			$mainIp = getenv('HTTP_X_FORWARDED_FOR');
+		else if(getenv('HTTP_X_FORWARDED'))
+			$mainIp = getenv('HTTP_X_FORWARDED');
+		else if(getenv('HTTP_FORWARDED_FOR'))
+			$mainIp = getenv('HTTP_FORWARDED_FOR');
+		else if(getenv('HTTP_FORWARDED'))
+			$mainIp = getenv('HTTP_FORWARDED');
+		else if(getenv('REMOTE_ADDR'))
+			$mainIp = getenv('REMOTE_ADDR');
+		else
+			$mainIp = 'UNKNOWN';
+		return $mainIp;
+	}
+
+  $http_client_ip       = $_SERVER['HTTP_CLIENT_IP'];        // Internet ip address
+  $http_x_forwarded_for = $_SERVER['HTTP_X_FORWARDED_FOR'];  // checking for proxy server
+  $remote_addr          = $_SERVER['REMOTE_ADDR']; //
+
+  if(!empty($http_client_ip)){
+    $ip = $http_client_ip;
+  }elseif(!empty($http_x_forwarded_for)){
+    $ip = $http_x_forwarded_for;
+  }else{
+    $ip = $remote_addr;
+  }
+
+  echo $ip;
 
 
 
