@@ -8,6 +8,10 @@ aynı değerleri php tarafındada session cookie vasıtasıyla 4ün birden kontr
 5- \n yeni satır oluşturmak için \r işaretciyi sıfırlar ve soldan başlatan satırbaşı döndürür kullanımı \r\n yalnız "" çift tırnak içinde kullanılması gerekir.
 6- http client - tam olarak anlamadım araştırılacak
 7- Mobilmi diye kod yazarken mobi kelimesinin kullanılması neredeyse yeterli
+8- psr1 psr17 gibi araştır
+9- program iskeleti veya ön hazırlık gibibirşey araştır
+10- http viewer, curl http viewer
+10- Network monitors (also known as reverse-firewalls)
 
 ---Ternary operator
 $can_vote = ($age>17 ? true : false);
@@ -134,6 +138,9 @@ function get_ip() {
   }
 
   echo $ip;
+
+session fingerprint ve bazı güvenlikler
+https://www.generacodice.com/en/articolo/23988/PHP-Session-Security?a=r
 
 
 
