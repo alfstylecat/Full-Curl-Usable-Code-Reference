@@ -190,6 +190,9 @@ getFile();
 
 ---Useragent Servisleri ve Curl İstek Örnekleri---
  1- https://user-agents.net/parser/action=parse&format=json&string= //post isteği direk api link json xml ile değiştirilebilir
+2- http://useragentstring.com/
+3- https://www.whatsmyua.info/
+4- https://developers.whatismybrowser.com/
 
 $useragent = $_SERVER['HTTP_USER_AGENT'];
 $curl = curl_init();
