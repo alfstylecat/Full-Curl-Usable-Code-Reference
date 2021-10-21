@@ -1,4 +1,27 @@
 <?
+//kullanılacak veritabanı gerekli düzeltmeler ve eklemeler yapılması gerek
+//id int, not null, auto increment
+//username text
+//ip_address text
+//country text
+//user_referrer text
+CREATE TABLE "users" (
+	"id"	INTEGER UNIQUE,
+	"user_name"	TEXT,
+	"ip_address"	TEXT,
+    "request_url" ?,
+    "request_size" ?,
+    "timestamp" TİMESTAMP,
+    "http_status_code" ?,
+    "http_method" ?,
+    "user_country" ?,
+    "user_agent"	TEXT,
+    "user_referrer" ?,
+    "user_port" ?,
+    "request_method" ?,
+    "server_protocol" ?,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
 
 //sqlite3 nesnesi olusturarak sqlite3 veritabani baglantisi aciyoruz
 $db = new SQLite3('test.db');
@@ -78,7 +101,7 @@ var_dump($escaped);
 
 Not – SQLite sorguları için dizelerinizi alıntılamak için addslashes() KULLANILMAMALIDIR; verilerinizi alırken garip sonuçlara yol açacaktır.
 
-<//örnek
+<//örnek sintesisdigital
 $db = new SQLite3('mydb.sq3');
 $sql = "SELECT * FROM items WHERE price < 3.00";
 $result = $db->query($sql);
@@ -86,6 +109,39 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)){
   echo $row['name'] . ': $' . $row['price'] . '<br/>';
 }
 unset($db);
+
+
+//bağlantı tablo oluşturma sorgu oluşturma listeleme
+$db= new SQLite3("../db/mydb.sqlite");//asuming you created a folder "db" in the root of your home drive and your database files is called "test.db".
+//$db->exec('CREATE TABLE table1(id INTEGER PRIMARY KEY NOT NULL, value TEXT)');
+//Uncomment the line above to create the  Table, do it only once.
+$string_to_insert=$db->escapeString(date("r" ,time()));//Important to escape any strings before inserting them into a query since they can contain an illegal character 
+//or can be used for "sting insertion" hacks.
+$db->exec("INSERT INTO table1 (value) VALUES ('$string_to_insert')");
+$sql_select='SELECT * FROM table1 ORDER BY ID DESC';
+$result=$db->query($sql_select);
+echo "<table border='1'>";
+echo "<tr>";
+$numColumns=$result->numColumns();
+for ($i = 0; $i < $numColumns; $i++)
+{
+    $colname=$result->columnName($i);
+    echo "<th>$colname</th>";
+}
+echo "</tr>";
+while($row = $result->fetchArray(SQLITE3_NUM))
+{
+    echo "<tr>";
+    for ($i = 0; $i < $numColumns; $i++)
+    {
+        $value=$row[$i];
+        echo "<th>$value</th>";
+    }
+    echo "</tr>";
+}
+echo "</table>";
+$sql_clean="DELETE FROM table1 WHERE ID<(SELECT MAX(ID) FROM table1)-20";//Keeps only the last 20 entries in the table.
+$db->exec($sql_clean);
 
 
 
