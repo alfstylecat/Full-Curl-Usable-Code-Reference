@@ -134,7 +134,7 @@ $waf_23 = $_SERVER['REQUEST_SCHEME'];
 $waf_24 = $_SERVER['QUERY_STRING']; //&veri=123 olan kısmı verir
 $waf_25 = $_SERVER['PHP_SELF']; //hep index.php kaldırılacak
 $waf_26 = $_SERVER['SCRIPT_NAME']; //hep index.php kaldırılacak
-$waf_27 = getenv('REMOTE_ADDR'); //daha çözemedim kalıyor
+$waf_27 = getenv('REMOTE_ADDR'); //cloudflare ipsi kaldırılacak
 $waf_28 = time(); //kendi belirttiğim zaman dilimi
 
 $waf_log_file       = "testwaffing.txt";
