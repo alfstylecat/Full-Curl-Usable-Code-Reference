@@ -125,6 +125,33 @@ function get_ip() {
 		return $mainIp;
 	}
 
+if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+    // When website is behind CloudFlare
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP']; 
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED'];
+} elseif (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_FORWARDED_FOR'];
+} elseif (isset($_SERVER['HTTP_FORWARDED'])) {
+    $ip = $_SERVER['HTTP_FORWARDED'];
+} elseif (isset($_SERVER['REMOTE_ADDR'])) {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+
+//ip engelleme
+$engellenmisIP = array("::1", "127.0.0.1");
+if (in_array($ipAdresi, $engellenmisIP)) {
+  # Burada engelenen IP adresi ile ilgili farklı işlemler yapılabilir.
+  echo "Engellenmiş IP";
+} else {
+  # Burada da diğer işlemler yapılabilir.
+  echo "Hoşgeldiniz";
+}
+
   $http_client_ip       = $_SERVER['HTTP_CLIENT_IP'];        // Internet ip address
   $http_x_forwarded_for = $_SERVER['HTTP_X_FORWARDED_FOR'];  // checking for proxy server
   $remote_addr          = $_SERVER['REMOTE_ADDR']; //
