@@ -19,6 +19,8 @@ Yapılacaklar
 11- suan online olanlar
 12- bugun online olanlar
 13- javascriptlede ayrı bir şekilde kullanıcının bilgilerini al ve phpden alınanlarla karşılaştır
+14- acceptlanguageden kullanıcının dili alınabilir get request headerdan alındı
+15- cf ip country alınacak
 
 
 İleri seviye yapılacaklar
@@ -47,7 +49,10 @@ Yapılacaklar
 23- hangi ülkeden kaç kişi
 24- hangi browserdan kaç kişi
 25- tarayıcı çözünürlükleri
-26- 
+26- accept encoding gzip araştırılacak işe yarıyorsa konulacak
+27- sehir alınacak
+28- asn alınacak
+29- vpn,proxy,tor,hosting bilgisi alınacak
 */
 
 $waf_username = "";
