@@ -68,6 +68,9 @@ Yapılacaklar
 ---Denenecekler---
 1- dosyadan veritabanı gibi tek tek almak istersek ilk önce fgets ile tek satır alıcaz sonra fgetc ile harf harf olacak sekilde bir sonraki satırdaki,
 eğer yapmışşak id değeri alınabilir.şimdilik fikir aşamasında
+2- fgets dosyadan ilk satırı okuyor, biz eğer dosyaya sondan değilde baştan veri eklemesini söyleyebilirsek fgets ile ilk satırı okuyup satırın başına geldikten sonra,
+regex ile | karakterine gelene kadar olan sayısı seçip seçtikten sonra bu sayı kaç ise üzerine +1 ekleyerek bir sonraki verinin başındaki satır numarasına ekleyebiliriz.
+
 */
 
 //Sitemdeki kullaniciyi esitlemek icin.
