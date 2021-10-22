@@ -15,11 +15,11 @@ sürekli veri yazımı olduğunda şimdilik bu bir sorun teşkil etmiyor ama ça
 
 
 
-$waf_log_file = "../../waffing.txt";
-$waf_log_file_open = fopen($waf_log_file, "r");
-?>
-
-//tablomuzun kötü gözükmemesi için birazcık renklendirip düzelttikki verileri rahat okuyabilelim.
+<!DOCTYPE html>
+<html>
+<head>
+<title>Waffing Logs Page</title>
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <style>
 body {
 	margin: 0;
@@ -36,52 +36,82 @@ th, td {
 	padding: 0;
 }
 </style>
+</head>
+<body>
+
+
 
 <?
-//tablomuzun başlangıcı
-echo '<table style="border: 1px solid black;">';
-//şimdilik 3 satırımız oldugu için 3 başlık ekledik
-echo '<tr><th>No</th><th>Username</th><th>Ip Address</th></tr>';
-//sayacı 1e ayarladık
+
+$waf_log_file = "../../waffing.txt";
+$waf_log_file_open = fopen($waf_log_file, "r");
+
+
+echo '<table id="waffing_log" style="border: 1px solid black;"><thead>';
+echo '<tr>
+<th>No</th>
+<th>Username</th>
+<th>Waf_1</th>
+<th>Waf_2</th>
+<th>Waf_3</th>
+<th>Waf_4</th>
+<th>Waf_5</th>
+<th>Waf_6</th>
+<th>Waf_7</th>
+<th>Waf_8</th>
+<th>Waf_9</th>
+<th>Waf_10</th>
+<th>Waf_11</th>
+<th>Waf_12</th>
+<th>Waf_13</th>
+<th>Waf_14</th>
+<th>Waf_15</th>
+<th>Waf_16</th>
+<th>Waf_17</th>
+<th>Waf_18</th>
+<th>Waf_19</th>
+<th>Waf_20</th>
+<th>Waf_21</th>
+<th>Waf_22</th>
+<th>Waf_23</th>
+<th>Waf_24</th>
+<th>Waf_25</th>
+<th>Waf_26</th>
+<th>Waf_27</th>
+<th>Waf_28</th>
+</tr></thead><tbody>';
 $counter = 1;
-//döngümüzü başlattık
 while(!feof($waf_log_file_open)) {
-//dosyadaki tüm verileri satır satır bir değişkene aktardık
 $dizi = fgets($waf_log_file_open);
-//explode fonksiyonumuzla | karakterine kadar olan kısımları böldükki tablomuzda kullanabilelim
 $bol = explode('|', $dizi);
-//en basa satır numaralarının gelmesi icin sayacımızı koyup böldüğümüz verileri tek tek tablo hücrelerine yerleştirdik.
-echo '<tr><td>'. $counter .'</td><td>'. $bol['0'] .'</td><td>'. $bol['1'] .'</td></tr>';
-//döngümüzden çıkan kaç satır varsa sayacımızı +1 arttırarak satır sayısı kadar kaç tane olduğunu yazdırdık.
+echo '<tr>
+<td>'. $counter .'</td>
+<td>'. $bol['0'] .'</td>
+<td>'. $bol['1'] .'</td>
+<td>'. $bol['2'] .'</td>
+<td>'. $bol['3'] .'</td>
+<td>'. $bol['4'] .'</td>
+<td>'. $bol['5'] .'</td>
+<td>'. $bol['6'] .'</td>
+<td>'. $bol['7'] .'</td>
+</tr>';
 $counter++;
-//while döngümüzü kapattık
 }
-//tablomuzun bitişini yaptık
-echo '</table>';
-//dosyayla işimiz bittiği için dosyamızı kapattık
+echo '</tbody></table>';
 fclose($waf_log_file_open);
+?>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready( function () {
+    $('#waffing_log').DataTable({
+					"pageLength": 20
+				
+				});
+} );
+</script>
 
-
-
-
-//1.versiyon
-/*
-while($all_log_read = fgets($waf_log_file_open)) {
-	echo $all_log_read ."<br>";
-}
-*/
-
-//2.versiyon
-/*
-echo '<table style="border: 1px solid black;">';
-$counter = 1;
-while(!feof($waf_log_file_open)) {
-$dizi = fgets($waf_log_file_open);
-echo '<tr><td>'. $counter .'</td>';
-echo '<td>'. $dizi .'</td></tr>';
-$counter++;
-}
-echo '</table>';
-*/
+</body>
+</html>
