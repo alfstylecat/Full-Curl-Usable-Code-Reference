@@ -12,6 +12,8 @@ aynı değerleri php tarafındada session cookie vasıtasıyla 4ün birden kontr
 9- program iskeleti veya ön hazırlık gibibirşey araştır
 10- http viewer, curl http viewer
 10- Network monitors (also known as reverse-firewalls)
+11- javascript bookmark yada sık kullanılanlara ekle
+12- cors açığı varmı kontrol et
 
 ---Ternary operator
 $can_vote = ($age>17 ? true : false);
@@ -194,6 +196,12 @@ if($yenilendi_mi) {
 } else {
   echo 'Bu sayfa ilk kez ziyaret edilmiş ve yenilenmemiş.';
 }
+
+//tarayıcı dili bulma veya yönlendirme
+$dil = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'],0,2);
+  if ($dil == 'tr') {
+    header("Location: tr.php");
+  }
 
 
 
