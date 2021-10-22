@@ -64,6 +64,10 @@ Yapılacaklar
 2- her veri yazımında verilerin en soluna bir öncekinden +1 artan sayaç yapılacak simdilik bilmiyorum.
 3- sürekli dosya yazımında fclose()'un kapatılıp kapatılmayacağı araştırılacak.belki sorunlara neden olabilir.
 4- verileri bir diziye aktararak dosyaya kaydetme araştırılacak ayrıştırılması daha kolay olabilir.
+
+---Denenecekler---
+1- dosyadan veritabanı gibi tek tek almak istersek ilk önce fgets ile tek satır alıcaz sonra fgetc ile harf harf olacak sekilde bir sonraki satırdaki,
+eğer yapmışşak id değeri alınabilir.şimdilik fikir aşamasında
 */
 
 //Sitemdeki kullaniciyi esitlemek icin.
