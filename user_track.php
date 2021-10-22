@@ -185,6 +185,16 @@ if (in_array($ipAdresi, $engellenmisIP)) {
 session fingerprint ve bazı güvenlikler
 https://www.generacodice.com/en/articolo/23988/PHP-Session-Security?a=r
 
+//sayfaya ilk kezmi gelinmiş yoksa daha öncede gelinmişmi
+$yenilendi_mi = (isset($_SERVER['HTTP_CACHE_CONTROL'])
+                &&
+                $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0');
+if($yenilendi_mi) {
+  echo 'Bu sayfa yenilenmiş.';
+} else {
+  echo 'Bu sayfa ilk kez ziyaret edilmiş ve yenilenmemiş.';
+}
+
 
 
 $username = "koray";
