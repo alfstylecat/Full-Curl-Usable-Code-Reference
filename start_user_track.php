@@ -73,18 +73,72 @@ regex ile | karakterine gelene kadar olan sayısı seçip seçtikten sonra bu sa
 
 */
 
-//Sitemdeki kullaniciyi esitlemek icin.
-$waf_username = "Otherusername";
-//Kullanicinin ip adresini aliyoruz.
-$waf_ip_address = $_SERVER['REMOTE_ADDR'];
-//Log dosyasini degiskene aktariyoruz.
-$waf_log_file = "waffing.txt";
+<?
+/*
+$waf_username       = $user['username'];
+$waf_ip_address     = $_SERVER['REMOTE_ADDR'];
+$waf_cf_ip          = $_SERVER['HTTP_CF_CONNECTING_IP'];
 
-//Log dosyasi sadece yazmak icin aciliyor.
+if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+    $waf_mix = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+    // When website is behind CloudFlare
+    $waf_mix = $_SERVER['HTTP_CF_CONNECTING_IP']; 
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $waf_mix = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
+    $waf_mix = $_SERVER['HTTP_X_FORWARDED'];
+} elseif (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+    $waf_mix = $_SERVER['HTTP_FORWARDED_FOR'];
+} elseif (isset($_SERVER['HTTP_FORWARDED'])) {
+    $waf_mix = $_SERVER['HTTP_FORWARDED'];
+} elseif (isset($_SERVER['REMOTE_ADDR'])) {
+    $waf_mix = $_SERVER['REMOTE_ADDR'];
+}
+
+
+
+//$waf_user_agent     = $_SERVER['HTTP_USER_AGENT']; daha sonra parse edilip eklenecek
+$waf_request_uri    = $_SERVER['REQUEST_URI'];
+$waf_referrer       = $_SERVER['HTTP_REFERER'];
+$waf_query_string   = $_SERVER['QUERY_STRING'];
+$waf_request_method = $_SERVER["REQUEST_METHOD"];
+$waf_log_file       = "waffing.txt";
+
 $waf_log_file_open = fopen($waf_log_file, "a");
-//Yazilacak veriler degiskene aktariliyor.
-$waf_log_write_data = $waf_username ."|". $waf_ip_address ."\n";
-//Degiskene aktarilan veriler log dosyasina yaziliyor.
+$waf_log_write_data = $waf_username ."|". $waf_ip_address ."|". $waf_cf_ip ."|". $waf_mix ."|". $waf_request_uri ."|". $waf_referrer ."|". $waf_query_string ."|". $waf_request_method ."\n";
 fwrite($waf_log_file_open, $waf_log_write_data);
-//Verilerin yazilmasindan sonra dosya kapatiliyor.
+fclose($waf_log_file_open);
+*/
+
+$waf_user = $user['username'];
+$waf_1 = $_SERVER['SERVER_PORT']; //hep 443 portu şimdilik kaldırılacak,detaylı
+$waf_2 = $_SERVER['HTTPS']; //hep on yani açık görünüyor şimdilik kaldırılacak,sonra detaylı araştırma
+$waf_3 = $_SERVER['SERVER_SIGNATURE']; //hep boş görünüyor
+$waf_4 = $_SERVER['SERVER_PROTOCOL']; //hep http/1.1 bizim serverınsa kaldırılacak gereksiz
+$waf_5 = $_SERVER['HTTP_CF_IPCOUNTRY']; //cloudflare varsa kullanıcının ülkesini verir - kalıyor
+$waf_6 = $_SERVER['HTTP_CF_CONNECTING_IP']; //cloudflare üzerinden kullanıcının ip adresini verir - kalıyor
+$waf_7 = $_SERVER['HTTP_CLIENT_IP']; //kullanıcının internet ip adresini verir şimdilik kalıyor
+$waf_8 = $_SERVER['HTTP_X_FORWARDED_FOR']; //proxy arkasındaki gerçek ipyi verir şimdilik kalıyor
+$waf_9 = $_SERVER['HTTP_X_FORWARDED_PROTO']; //hep https gösteriyor şimdilik kaldırılacak
+$waf_10 = $_SERVER['HTTP_REFERER']; //kullanıcı nerden geldi - kalıyor
+$waf_11 = $_SERVER['HTTP_USER_AGENT']; //kullanıcının browser bilgisi kalıyor
+$waf_12 = $_SERVER['HTTP_ACCEPT']; //bakılacak
+$waf_14 = $_SERVER['HTTP_ACCEPT_ENCODING']; //hep gzip şimdilik kaldırılacak
+$waf_15 = $_SERVER['HTTP_ACCEPT_LANGUAGE']; //kullanıcının ülkesini ve dilini verir kalıyor
+$waf_19 = $_SERVER['REMOTE_ADDR']; //kullanıcının ip adresini verir kalıyor
+$waf_20 = $_SERVER['REQUEST_URI']; //tam anlamadım ama kalıyor
+$waf_21 = $_SERVER['REQUEST_METHOD']; //hep get şimdilik kaldırılacak
+$waf_22 = $_SERVER['REQUEST_TIME']; //istek unix zaman dilimi kalıyor
+$waf_23 = $_SERVER['REQUEST_SCHEME'];
+$waf_24 = $_SERVER['QUERY_STRING']; //&veri=123 olan kısmı verir
+$waf_25 = $_SERVER['PHP_SELF']; //hep index.php kaldırılacak
+$waf_26 = $_SERVER['SCRIPT_NAME']; //hep index.php kaldırılacak
+$waf_27 = getenv('REMOTE_ADDR'); //daha çözemedim kalıyor
+$waf_28 = time(); //kendi belirttiğim zaman dilimi
+
+$waf_log_file       = "testwaffing.txt";
+$waf_log_file_open = fopen($waf_log_file, "a");
+$waf_log_write_data = $waf_user ."|". $waf_1 ."|". $waf_2 ."|". $waf_3 ."|". $waf_4 ."|". $waf_5 ."|". $waf_6 ."|". $waf_7 ."|". $waf_8 ."|". $waf_9 ."|". $waf_10 ."|". $waf_11 ."|". $waf_12 ."|". $waf_14 ."|". $waf_15 ."|". $waf_19 ."|". $waf_20 ."|". $waf_21 ."|". $waf_22 ."|". $waf_23 ."|". $waf_24 ."|". $waf_25 ."|". $waf_26 ."|". $waf_27 ."|". $waf_28 ."\n";
+fwrite($waf_log_file_open, $waf_log_write_data);
 fclose($waf_log_file_open);
